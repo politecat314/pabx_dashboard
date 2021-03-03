@@ -150,12 +150,20 @@
        "External" => $disposition 
     );
 
+    $department_datatable = array(); // for department datatable on deparment.php
     $department_donuts = array(); 
     // donuts for dropdown departments
     // $departmetn => $userfield => $disposition
     foreach ($contactlist as $value) {
         if (!array_key_exists($value[0], $department_donuts)) {
             $department_donuts[$value[0]] = $userfield;
+            $department_datatable[$value[0]] = array(
+            "call time" => 0,
+            "ANSWERED" => 0,
+            "NO ANSWER" => 0,
+            "BUSY" => 0,
+            "FAILED" => 0
+            );
         }
     }
 
@@ -210,6 +218,10 @@
             'BUSY'=>0,
             'call time'=>0
         );
+        // start of deparment datatable
+        $department_datatable[$current_department][$current_disposition] += 1;
+        $department_datatable[$current_department]['call time'] += $current_talk_time;
+        // end of department datatable
 
         // start of department donuts
         $department_donuts[$current_department][$current_userfield][$current_disposition] += 1;

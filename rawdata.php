@@ -75,9 +75,9 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
                 <div class="navbar-nav">
-                    <a class="nav-item nav-link" href="/optimized">Home <span class="sr-only">(current)</span></a>
-                    <a class="nav-item nav-link" href="#">Department</a>
-                    <a class="nav-item nav-link active" href="rawdata.php">Raw-data</a>
+                    <a class="nav-item nav-link" href="index.php">Home <span class="sr-only">(current)</span></a>
+                    <a class="nav-item nav-link" href="department.php">Department</a>
+                    <a class="nav-item nav-link active" href="#">Raw-data</a>
                     <a class="nav-item nav-link" href="#">Info</a>
                 </div>
             </div>
@@ -169,7 +169,7 @@
                 [10, 25, 50, -1],
                 [10, 25, 50, "All"]
             ],
-            "pageLength" : 100,
+            "pageLength" : 25,
             dom: 'Blfrtip',
             buttons: [
                 'copy', 'csv', 'excel', 'pdf', 'print'

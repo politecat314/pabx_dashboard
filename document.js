@@ -17,6 +17,13 @@ $(document).ready(function () {
     $('#internal_caller_data').DataTable(data_table_object);
     $('#outbound_caller_data').DataTable(data_table_object);
     $('#external_caller_data').DataTable(data_table_object);
+    $('#department_data').DataTable({
+        dom: 'Bfrtip',
+        pageLength:-1,
+        buttons: [
+            'copy', 'csv', 'excel', 'pdf', 'print'
+        ]
+    });
 
 // "order": [[ 3, "asc" ]]
 
