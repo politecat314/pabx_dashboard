@@ -78,7 +78,7 @@
                     <a class="nav-item nav-link active" href="#">Home <span class="sr-only">(current)</span></a>
                     <a class="nav-item nav-link" href="department.php">Department</a>
                     <a class="nav-item nav-link" href="rawdata.php">Raw-data</a>
-                    <a class="nav-item nav-link" href="#">Info</a>
+                    
                 </div>
             </div>
         </div>
@@ -86,15 +86,12 @@
 
 
     <div class="container" style="padding-top:2rem">
-
         <div class="row">
             <canvas id="callsPerDayChart" width="400" height="100"></canvas>
         </div>
-
-
-
     </div>
     <hr>
+
 
     <div class="container" style="padding-top: 1rem">
         <div class="row">
@@ -148,7 +145,7 @@
                     </thead>
                     <tbody>
                         <tr>
-                            <th scope="row">Inbound</th>
+                            <th scope="row">Incoming</th>
                             <td>
                                 <div class="dropdown show">
                                     <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -214,7 +211,7 @@
                             </td>
                         </tr>
                         <tr>
-                            <th scope="row">Outbound</th>
+                            <th scope="row">Outgoing</th>
                             <td>
                                 <div class="dropdown show">
                                     <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -293,58 +290,17 @@
 
 
     </div>
+    
+    <div style="background-color:#F8F8F8">
     <hr>
     <div class="container">
         <div class="row">
             <canvas id="callByDispositionBarChart" width="400" height="200"></canvas>
         </div>
     </div>
-
-    <div style="background-color:#F8F8F8">
-        <hr>
-        <div class="container">
-            <div class="row" style="padding-bottom:5px">
-                <h3>Generate graphs</h3>
-            </div>
-            <div class="row">
-                <div class="col-5" style="padding-left:0px; padding-right:5px">
-                    <select id="department_selector" class="selectpicker" data-style="btn-outline-dark" data-live-search="true" data-width="100%" title="Choose a department">
-                        <?php
-                        foreach ($department_donuts as $dept_name => $value) {
-                            echo "<option>$dept_name</option>";
-                        }
-
-                        ?>
-                    </select>
-                </div>
-                <div class="col" style="padding-left:0px">
-                    <button type="submit" class="btn btn-primary mb-2" id="generate_graph_button">Generate graphs</button>
-                </div>
-            </div>
-
-            <div style="display: none;" id="departmentDonutsContainerDiv">
-                <div class="row" style="padding:1rem">
-                    <div class="col" id="inboundDepartmentDonutParentDiv" class="department_donut">
-                        <canvas id="inboundDepartmentDonut" height="150"></canvas>
-                    </div>
-                    <div class="col" id="internalDepartmentDonutParentDiv" class="department_donut">
-                        <canvas id="internalDepartmentDonut" height="150"></canvas>
-                    </div>
-                </div>
-
-                <div class="row" style="padding:1rem">
-                    <div class="col" id="outboundDepartmentDonutParentDiv" class="department_donut">
-                        <canvas id="outboundDepartmentDonut" height="150"></canvas>
-                    </div>
-                    <div class="col" id="externalDepartmentDonutParentDiv" class="department_donut">
-                        <canvas id="externalDepartmentDonut" height="150"></canvas>
-                    </div>
-                </div>
-            </div>
-
-        </div>
-        <hr>
+    <hr>
     </div>
+
 
     <div class="container datatable-container">
         <div class="">
@@ -358,7 +314,7 @@
                         <th>Name</th>
                         <th>Department</th>
                         <th>Exit</th> <!-- caller and callee number both appear here-->
-                        <th>Total talk time</th>
+                        <th>Total call time</th>
                         <th>Answered</th>
                         <th>No answer</th>
                         <th>Busy</th>
@@ -379,14 +335,14 @@
 
     <hr id="hr_above_bigButton">
     <div class="container">
-        <button id="bigbutton" type="button" class="btn btn-primary btn-lg btn-block">Show caller data grouped by userfield</button>
+        <button id="bigbutton" type="button" class="btn btn-primary btn-lg btn-block">Show section statistics</button>
         </div><hr id="hr_below_bigButton">
     <div id="hiddenDiv" style="display: none;">
 
         <div class="container datatable-container">
             
                 <div class="">
-                    <h2 id="inbound_caller_data_heading">Inbound caller data</h2>
+                    <h2 id="inbound_caller_data_heading">Incoming caller data</h2>
                 </div>
 
                 <div class="">
@@ -397,7 +353,7 @@
                                 <th>Name</th>
                                 <th>Department</th>
                                 <th>Callee number</th>
-                                <th>Total talk time</th>
+                                <th>Total call time</th>
                                 <th>ANSWERED</th>
                                 <th>NO ANSWER</th>
                                 <th>BUSY</th>
@@ -435,8 +391,8 @@
                                 <th>#</th>
                                 <th>Name</th>
                                 <th>Department</th>
-                                <th>Callee number</th>
-                                <th>Total talk time</th>
+                                <th>Caller number</th>
+                                <th>Total call time</th>
                                 <th>ANSWERED</th>
                                 <th>NO ANSWER</th>
                                 <th>BUSY</th>
@@ -464,7 +420,7 @@
         <div class="container datatable-container">
             
                 <div class="">
-                    <h2 id="outbound_caller_data_heading">Outbound caller data</h2>
+                    <h2 id="outbound_caller_data_heading">Outgoing caller data</h2>
                 </div>
 
                 <div class="">
@@ -474,8 +430,8 @@
                                 <th>#</th>
                                 <th>Name</th>
                                 <th>Department</th>
-                                <th>Callee number</th>
-                                <th>Total talk time</th>
+                                <th>Caller number</th>
+                                <th>Total call time</th>
                                 <th>ANSWERED</th>
                                 <th>NO ANSWER</th>
                                 <th>BUSY</th>
@@ -514,7 +470,7 @@
                                 <th>Name</th>
                                 <th>Department</th>
                                 <th>Callee number</th>
-                                <th>Total talk time</th>
+                                <th>Total call time</th>
                                 <th>ANSWERED</th>
                                 <th>NO ANSWER</th>
                                 <th>BUSY</th>
@@ -554,7 +510,8 @@
         <!-- Copyright -->
         <div class="text-center p-3" style="background-color:#85929E">
             By Aman.
-            <a class="text-light" href="https://drive.google.com/file/d/1fUzPoq-PpmsJGjD1Elv6IpoxyyzRFhrx/view?usp=sharing">API Documentation</a>
+            <a class="text-light" href="https://drive.google.com/file/d/1fUzPoq-PpmsJGjD1Elv6IpoxyyzRFhrx/view?usp=sharing">API Documentation.</a> 
+            <a class="text-light" href="filename_5205.csv">Download csv</a>
         </div>
         <!-- Copyright -->
     </footer>
@@ -796,151 +753,6 @@
         });
     </script>
 
-    <script>
-        //  inboundDepartmentDonut
-
-        // var inboundDepartmentDonut = document.getElementById("inboundDepartmentDonut").getContext("2d");
-        // window.myBar = new Chart(inboundDepartmentDonut, {
-        //     type: 'doughnut',
-        //     data: {
-        //         labels: Object.keys(disposition),
-        //         datasets: [{
-        //             //label: '# of Tomatoes',
-        //             data: Object.values(disposition),
-        //             backgroundColor: [
-        //                 'rgba(75, 192, 192, 0.8)',
-        //                 'rgba(255, 99, 132, 0.8)',
-        //                 'rgba(54, 162, 235, 0.8)',
-        //                 'rgba(255, 206, 86, 0.8)',
-
-        //             ],
-        //             borderColor: [
-        //                 'rgba(75, 192, 192, 1)',
-        //                 'rgba(255,99,132,1)',
-        //                 'rgba(54, 162, 235, 1)',
-        //                 'rgba(255, 206, 86, 1)',
-
-        //             ],
-        //             borderWidth: 1
-        //         }]
-        //     },
-        //     options: {
-        //         title: {
-        //             display: true,
-        //             text: 'Inbound',
-        //             fontSize: 15
-        //         }
-        //     }
-        // });
-
-
-        // //  internalDepartmentDonut
-
-        // var internalDepartmentDonut = document.getElementById("internalDepartmentDonut").getContext("2d");
-        // window.myBar = new Chart(internalDepartmentDonut, {
-        //     type: 'doughnut',
-        //     data: {
-        //         labels: Object.keys(disposition),
-        //         datasets: [{
-        //             //label: '# of Tomatoes',
-        //             data: Object.values(disposition),
-        //             backgroundColor: [
-        //                 'rgba(75, 192, 192, 0.8)',
-        //                 'rgba(255, 99, 132, 0.8)',
-        //                 'rgba(54, 162, 235, 0.8)',
-        //                 'rgba(255, 206, 86, 0.8)',
-
-        //             ],
-        //             borderColor: [
-        //                 'rgba(75, 192, 192, 1)',
-        //                 'rgba(255,99,132,1)',
-        //                 'rgba(54, 162, 235, 1)',
-        //                 'rgba(255, 206, 86, 1)',
-
-        //             ],
-        //             borderWidth: 1
-        //         }]
-        //     },
-        //     options: {
-        //         title: {
-        //             display: true,
-        //             text: 'Internal',
-        //             fontSize: 15
-        //         }
-        //     }
-        // });
-
-
-        // //  outboundDepartmentDonut
-
-        // var outboundDepartmentDonut = document.getElementById("outboundDepartmentDonut").getContext("2d");
-        // window.myBar = new Chart(outboundDepartmentDonut, {
-        //     type: 'doughnut',
-        //     data: {
-        //         labels: Object.keys(disposition),
-        //         datasets: [{
-        //             //label: '# of Tomatoes',
-        //             data: Object.values(disposition),
-        //             backgroundColor: [
-        //                 'rgba(75, 192, 192, 0.8)',
-        //                 'rgba(255, 99, 132, 0.8)',
-        //                 'rgba(54, 162, 235, 0.8)',
-        //                 'rgba(255, 206, 86, 0.8)',
-
-        //             ],
-        //             borderColor: [
-        //                 'rgba(75, 192, 192, 1)',
-        //                 'rgba(255,99,132,1)',
-        //                 'rgba(54, 162, 235, 1)',
-        //                 'rgba(255, 206, 86, 1)',
-
-        //             ],
-        //             borderWidth: 1
-        //         }]
-        //     },
-        //     options: {
-        //         title: {
-        //             display: true,
-        //             text: 'Outbound',
-        //             fontSize: 15
-        //         }
-        //     }
-        // });
-
-        // var externalDepartmentDonut = document.getElementById("externalDepartmentDonut").getContext("2d");
-        // window.myBar = new Chart(externalDepartmentDonut, {
-        //     type: 'doughnut',
-        //     data: {
-        //         labels: Object.keys(disposition),
-        //         datasets: [{
-        //             // label: 'External',
-        //             data: Object.values(disposition),
-        //             backgroundColor: [
-        //                 'rgba(75, 192, 192, 0.8)',
-        //                 'rgba(255, 99, 132, 0.8)',
-        //                 'rgba(54, 162, 235, 0.8)',
-        //                 'rgba(255, 206, 86, 0.8)',
-
-        //             ],
-        //             borderColor: [
-        //                 'rgba(75, 192, 192, 1)',
-        //                 'rgba(255,99,132,1)',
-        //                 'rgba(54, 162, 235, 1)',
-        //                 'rgba(255, 206, 86, 1)',
-
-        //             ],
-        //             borderWidth: 1
-        //         }]
-        //     },
-        //     options: {
-        //         title: {
-        //             display: true,
-        //             text: 'External',
-        //             fontSize: 15,
-        //         }
-        //     }
-        // });
-    </script>
 
     <script>
         const drawDepartmentDonut = function(data, elementId, donut_title) {

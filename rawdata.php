@@ -78,7 +78,7 @@
                     <a class="nav-item nav-link" href="index.php">Home <span class="sr-only">(current)</span></a>
                     <a class="nav-item nav-link" href="department.php">Department</a>
                     <a class="nav-item nav-link active" href="#">Raw-data</a>
-                    <a class="nav-item nav-link" href="#">Info</a>
+                    
                 </div>
             </div>
         </div>
@@ -98,6 +98,7 @@
                         <th>Callee</th>
                         <th>Start time</th>
                         <th>Call time</th>
+                        <th>Userfield</th>
                         <th>Disposition</th>
                     </tr>
                 </thead>
@@ -118,6 +119,7 @@
                         echo "<td>" . $value[$ref['callee number']] . "</td>";
                         echo "<td>" . $value[$ref['start time']] . "</td>";
                         echo "<td>" . convertDate($value[$ref['call time']]) . "</td>";
+                        echo "<td>" . $value[$ref['userfield']] . "</td>";
                         echo "<td>" . $value[$ref['disposition']] . "</td>";
                         echo "</tr>";
                     }
@@ -137,9 +139,10 @@
 
             <!-- Copyright -->
             <div class="text-center p-3" style="background-color:#85929E">
-                By Aman.
-                <a class="text-light" href="https://drive.google.com/file/d/1fUzPoq-PpmsJGjD1Elv6IpoxyyzRFhrx/view?usp=sharing">API Documentation</a>
-            </div>
+            By Aman.
+            <a class="text-light" href="https://drive.google.com/file/d/1fUzPoq-PpmsJGjD1Elv6IpoxyyzRFhrx/view?usp=sharing">API Documentation.</a> 
+            <a class="text-light" href="filename_5205.csv">Download csv</a>
+        </div>
             <!-- Copyright -->
         </footer>
     </div>

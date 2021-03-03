@@ -279,9 +279,19 @@
 
     }
 
-    // sorting
-    ksort($department_donuts);
+    // start of sorting
+    ksort($department_donuts); // for department donuts selector
+    ksort($caller_num_data);
+    foreach($caller_num_data_by_userfield as &$value) {
+        ksort($value);
+    }
+    ksort($department_datatable);
 
+    
+
+    // $sort = array_column($caller_num_data, $ref['callee number']);
+    // array_multisort($sort, SORT_ASC, $csv);
+    // end of sorting
 
     function convertDate($time) { // time must be in seconds. Returns time as a stirng
         // > 86400 when time is more than 1 day
