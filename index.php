@@ -23,6 +23,7 @@
             margin-bottom: 0rem;
         }
 
+        .container.datatable-container {}
     </style>
 
 
@@ -66,7 +67,7 @@
         </div>
     </div>
 
-    <nav class="navbar navbar-expand-lg navbar-dark sticky-top" style="background-color:#34495E">
+    <nav id="top_navbar" class="navbar navbar-expand-lg navbar-dark sticky-top" style="background-color:#34495E">
         <div class="container">
 
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
@@ -345,67 +346,50 @@
         <hr>
     </div>
 
-
-    <div class="container">
-        <div class="row" style="padding-top: 30px; padding-bottom: 30px;">
-            <div class="row">
-                <h2>Caller data</h2>
-            </div>
-
-            <div class="row">
-                <table id="caller_data" class="display table">
-                    <thead>
-                        <tr>
-                            <th>#</th>
-                            <th>Name</th>
-                            <th>Department</th>
-                            <th>Number</th> <!-- caller and callee number both appear here-->
-                            <th>ANSWERED</th>
-                            <th>NO ANSWER</th>
-                            <th>BUSY</th>
-                            <th>FAILED</th>
-                            <th>Total</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <?php
-                        $iterator = 0;
-                        foreach ($caller_num_data as $key => $value) {
-                            $total = $value['ANSWERED'] + $value['NO ANSWER'] + $value['BUSY'] + $value['FAILED'];
-                            echo "<tr>";
-                            echo "<td><b>" . ++$iterator . "</b></td>";
-                            echo "<td>" . $value['Name'] . "</td>";
-                            echo "<td>" . $value['Department'] . "</td>";
-                            echo "<td>" . $key . "</td>";
-                            echo "<td>" . $value['ANSWERED'] . "</td>";
-                            echo "<td>" . $value['NO ANSWER'] . "</td>";
-                            echo "<td>" . $value['BUSY'] . "</td>";
-                            echo "<td>" . $value['FAILED'] . "</td>";
-                            echo "<td>" . $total . "</td>";
-                            echo "</tr>";
-                        }
-                        ?>
-                    </tbody>
-                </table>
-
-
-
-            </div>
-
+    <div class="container datatable-container">
+        <div class="">
+            <h2>Caller data</h2>
         </div>
+        <div class="">
+            <table id="caller_data" class="display table">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Name</th>
+                        <th>Department</th>
+                        <th>Exit</th> <!-- caller and callee number both appear here-->
+                        <th>Total talk time</th>
+                        <th>Answered</th>
+                        <th>No answer</th>
+                        <th>Busy</th>
+                        <th>Failed</th>
+                        <th>Total</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php
+                    $iterator = 0;
+                    generateCallerNumDatatable($caller_num_data);
+                    
+                    ?>
+                </tbody>
+            </table>
+        </div>
+    </div>
 
-        <hr>
+    <hr id="hr_above_bigButton">
+    <div class="container">
         <button id="bigbutton" type="button" class="btn btn-primary btn-lg btn-block">Show caller data grouped by userfield</button>
-        <hr>
+        </div><hr id="hr_below_bigButton">
+    <div id="hiddenDiv" style="display: none;">
 
-        <div id="hiddenDiv" style="display: none;">
-
-            <div class="row" style="padding-top: 30px; padding-bottom: 30px;">
-                <div class="row">
+        <div class="container datatable-container">
+            
+                <div class="">
                     <h2 id="inbound_caller_data_heading">Inbound caller data</h2>
                 </div>
 
-                <div class="col-12">
+                <div class="">
                     <table id="inbound_caller_data" class="display table">
                         <thead>
                             <tr>
@@ -413,6 +397,7 @@
                                 <th>Name</th>
                                 <th>Department</th>
                                 <th>Callee number</th>
+                                <th>Total talk time</th>
                                 <th>ANSWERED</th>
                                 <th>NO ANSWER</th>
                                 <th>BUSY</th>
@@ -422,22 +407,9 @@
                         </thead>
                         <tbody>
                             <?php
-                            $temp_arr = $caller_num_data_by_userfield['Inbound'];
-                            $iterator = 0;
-                            foreach ($temp_arr as $key => $value) {
-                                $total = $value['ANSWERED'] + $value['NO ANSWER'] + $value['BUSY'] + $value['FAILED'];
-                                echo "<tr>";
-                                echo "<td><b>" . ++$iterator . "</b></td>";
-                                echo "<td>" . $value['Name'] . "</td>";
-                                echo "<td>" . $value['Department'] . "</td>";
-                                echo "<td>" . $key . "</td>";
-                                echo "<td>" . $value['ANSWERED'] . "</td>";
-                                echo "<td>" . $value['NO ANSWER'] . "</td>";
-                                echo "<td>" . $value['BUSY'] . "</td>";
-                                echo "<td>" . $value['FAILED'] . "</td>";
-                                echo "<td>" . $total . "</td>";
-                                echo "</tr>";
-                            }
+                            
+                            generateCallerNumDatatable($caller_num_data_by_userfield['Inbound']);
+                            
                             ?>
                         </tbody>
                     </table>
@@ -446,22 +418,25 @@
 
                 </div>
 
-            </div>
+            
+        </div>
 
-            <hr />
-            <div class="row" style="padding-top: 30px; padding-bottom: 30px;">
-                <div class="row">
-                    <h2>Internal caller data</h2>
+        <hr />
+        <div class="container datatable-container">
+            
+                <div class="">
+                    <h2 id="internal_caller_data_heading">Internal caller data</h2>
                 </div>
 
-                <div class="col-12">
+                <div class="">
                     <table id="internal_caller_data" class="display table">
                         <thead>
                             <tr>
                                 <th>#</th>
                                 <th>Name</th>
                                 <th>Department</th>
-                                <th>Caller number</th>
+                                <th>Callee number</th>
+                                <th>Total talk time</th>
                                 <th>ANSWERED</th>
                                 <th>NO ANSWER</th>
                                 <th>BUSY</th>
@@ -471,22 +446,9 @@
                         </thead>
                         <tbody>
                             <?php
-                            $temp_arr = $caller_num_data_by_userfield['Internal'];
-                            $iterator = 0;
-                            foreach ($temp_arr as $key => $value) {
-                                $total = $value['ANSWERED'] + $value['NO ANSWER'] + $value['BUSY'] + $value['FAILED'];
-                                echo "<tr>";
-                                echo "<td><b>" . ++$iterator . "</b></td>";
-                                echo "<td>" . $value['Name'] . "</td>";
-                                echo "<td>" . $value['Department'] . "</td>";
-                                echo "<td>" . $key . "</td>";
-                                echo "<td>" . $value['ANSWERED'] . "</td>";
-                                echo "<td>" . $value['NO ANSWER'] . "</td>";
-                                echo "<td>" . $value['BUSY'] . "</td>";
-                                echo "<td>" . $value['FAILED'] . "</td>";
-                                echo "<td>" . $total . "</td>";
-                                echo "</tr>";
-                            }
+                            
+                            generateCallerNumDatatable($caller_num_data_by_userfield['Internal']);
+                            
                             ?>
                         </tbody>
                     </table>
@@ -495,24 +457,25 @@
 
                 </div>
 
-            </div>
+            
+        </div>
 
-
-
-            <hr />
-            <div class="row" style="padding-top: 30px; padding-bottom: 30px;">
-                <div class="row">
-                    <h2>Outbound caller data</h2>
+        <hr />
+        <div class="container datatable-container">
+            
+                <div class="">
+                    <h2 id="outbound_caller_data_heading">Outbound caller data</h2>
                 </div>
 
-                <div class="col-12">
+                <div class="">
                     <table id="outbound_caller_data" class="display table">
                         <thead>
                             <tr>
                                 <th>#</th>
                                 <th>Name</th>
                                 <th>Department</th>
-                                <th>Caller number</th>
+                                <th>Callee number</th>
+                                <th>Total talk time</th>
                                 <th>ANSWERED</th>
                                 <th>NO ANSWER</th>
                                 <th>BUSY</th>
@@ -522,22 +485,9 @@
                         </thead>
                         <tbody>
                             <?php
-                            $temp_arr = $caller_num_data_by_userfield['Outbound'];
-                            $iterator = 0;
-                            foreach ($temp_arr as $key => $value) {
-                                $total = $value['ANSWERED'] + $value['NO ANSWER'] + $value['BUSY'] + $value['FAILED'];
-                                echo "<tr>";
-                                echo "<td><b>" . ++$iterator . "</b></td>";
-                                echo "<td>" . $value['Name'] . "</td>";
-                                echo "<td>" . $value['Department'] . "</td>";
-                                echo "<td>" . $key . "</td>";
-                                echo "<td>" . $value['ANSWERED'] . "</td>";
-                                echo "<td>" . $value['NO ANSWER'] . "</td>";
-                                echo "<td>" . $value['BUSY'] . "</td>";
-                                echo "<td>" . $value['FAILED'] . "</td>";
-                                echo "<td>" . $total . "</td>";
-                                echo "</tr>";
-                            }
+                            
+                            generateCallerNumDatatable($caller_num_data_by_userfield['Outbound']);
+                            
                             ?>
                         </tbody>
                     </table>
@@ -546,15 +496,17 @@
 
                 </div>
 
-            </div>
+            
+        </div>
 
-            <hr />
-            <div class="row" style="padding-top: 30px; padding-bottom: 30px;">
-                <div class="row">
-                    <h2>External caller data</h2>
+        <hr />
+        <div class="container datatable-container">
+            
+                <div class="">
+                    <h2 id="external_caller_data_heading">External caller data</h2>
                 </div>
 
-                <div class="col-12">
+                <div class="">
                     <table id="external_caller_data" class="display table">
                         <thead>
                             <tr>
@@ -562,6 +514,7 @@
                                 <th>Name</th>
                                 <th>Department</th>
                                 <th>Callee number</th>
+                                <th>Total talk time</th>
                                 <th>ANSWERED</th>
                                 <th>NO ANSWER</th>
                                 <th>BUSY</th>
@@ -571,22 +524,9 @@
                         </thead>
                         <tbody>
                             <?php
-                            $temp_arr = $caller_num_data_by_userfield['External'];
-                            $iterator = 0;
-                            foreach ($temp_arr as $key => $value) {
-                                $total = $value['ANSWERED'] + $value['NO ANSWER'] + $value['BUSY'] + $value['FAILED'];
-                                echo "<tr>";
-                                echo "<td><b>" . ++$iterator . "</b></td>";
-                                echo "<td>" . $value['Name'] . "</td>";
-                                echo "<td>" . $value['Department'] . "</td>";
-                                echo "<td>" . $key . "</td>";
-                                echo "<td>" . $value['ANSWERED'] . "</td>";
-                                echo "<td>" . $value['NO ANSWER'] . "</td>";
-                                echo "<td>" . $value['BUSY'] . "</td>";
-                                echo "<td>" . $value['FAILED'] . "</td>";
-                                echo "<td>" . $total . "</td>";
-                                echo "</tr>";
-                            }
+                            
+                            generateCallerNumDatatable($caller_num_data_by_userfield['External']);
+                            
                             ?>
                         </tbody>
                     </table>
@@ -595,30 +535,37 @@
 
                 </div>
 
-            </div>
-
-
+            
         </div>
+
+
+
+
+
+
     </div>
 
+
     <!-- Footer -->
+    <div style="padding-top:2rem">
     <footer class="bg-light text-center text-lg-start">
 
 
         <!-- Copyright -->
-        <div class="text-center p-3"  style="background-color:#85929E">
+        <div class="text-center p-3" style="background-color:#85929E">
             By Aman.
             <a class="text-light" href="https://drive.google.com/file/d/1fUzPoq-PpmsJGjD1Elv6IpoxyyzRFhrx/view?usp=sharing">API Documentation</a>
         </div>
         <!-- Copyright -->
     </footer>
+    </div>
     <!-- Footer -->
 
     <!--loading scripts from disk-->
     <script src="/optimized/scripts/jquery-3.5.1.min.js"></script>
     <script src="/optimized/scripts/popper.min.js"></script>
     <script src="/optimized/scripts/bootstrap.min.js"></script>
-    
+
 
 
     <script src="/optimized/scripts/jquery.dataTables.min.js"></script>
@@ -637,8 +584,7 @@
 
     <script>
         // previous colours used in canvasjs
-        previousCanvasJSColors = ["#9BBB58","#C0504E","#4F81BC","#23BFAA",];
-
+        previousCanvasJSColors = ["#9BBB58", "#C0504E", "#4F81BC", "#23BFAA", ];
     </script>
 
     <script src='document.js'></script>
@@ -1046,7 +992,7 @@
         const php_department_donut_data = <?php echo json_encode($department_donuts, JSON_NUMERIC_CHECK); ?>;
         const departmentDonutsContainerDiv = document.getElementById("departmentDonutsContainerDiv");
         generate_graph_button.onclick = function() {
-            
+
 
 
             let current_department = department_selector.value;
@@ -1061,10 +1007,10 @@
             // php_department_donut_data[current_department]['Inbound']
             // php_department_donut_data[current_department]['Internal']
             // php_department_donut_data[current_department]['Outbound']
-            drawDepartmentDonut(php_department_donut_data[current_department]['Inbound'],"inboundDepartmentDonut","Inbound");
-            drawDepartmentDonut(php_department_donut_data[current_department]['Internal'],"internalDepartmentDonut","Internal");
-            drawDepartmentDonut(php_department_donut_data[current_department]['Outbound'],"outboundDepartmentDonut","Outbound");
-            drawDepartmentDonut(php_department_donut_data[current_department]['External'],"externalDepartmentDonut","External");
+            drawDepartmentDonut(php_department_donut_data[current_department]['Inbound'], "inboundDepartmentDonut", "Inbound");
+            drawDepartmentDonut(php_department_donut_data[current_department]['Internal'], "internalDepartmentDonut", "Internal");
+            drawDepartmentDonut(php_department_donut_data[current_department]['Outbound'], "outboundDepartmentDonut", "Outbound");
+            drawDepartmentDonut(php_department_donut_data[current_department]['External'], "externalDepartmentDonut", "External");
 
         }
     </script>

@@ -200,13 +200,15 @@
         $current_department = $contactlist[$current_caller_number][0];
         $current_name = $contactlist[$current_caller_number][1];
         $current_disposition = $csv[$i][$ref['disposition']]; // select current disposition on line i
+        $current_talk_time = $csv[$i][$ref['call time']]; // select current disposition on line i
         $current_caller_number_data_array = array(
             'Name'=> $current_name, 
             'Department'=> $current_department,
             'NO ANSWER'=>0,
             'ANSWERED'=>0,
             'FAILED'=>0,
-            'BUSY'=>0
+            'BUSY'=>0,
+            'call time'=>0
         );
 
         // start of department donuts
@@ -235,6 +237,7 @@
             $caller_num_data[$current_caller_number] = $current_caller_number_data_array; // index.php datatable
         }
         $caller_num_data[$current_caller_number][$current_disposition] += 1;
+        $caller_num_data[$current_caller_number]['call time'] += $current_talk_time;
         // end of caller number datatables (index.php)
 
 
@@ -243,6 +246,7 @@
             $caller_num_data_by_userfield[$current_userfield][$current_caller_number] = $current_caller_number_data_array; 
         }
         $caller_num_data_by_userfield[$current_userfield][$current_caller_number][$current_disposition] += 1;
+        $caller_num_data_by_userfield[$current_userfield][$current_caller_number]['call time'] += $current_talk_time;
         // end of datatables grouped by userfield
 
         // start of graph
@@ -263,8 +267,39 @@
 
     }
 
-
+    // sorting
     ksort($department_donuts);
+
+
+    function convertDate($time) { // time must be in seconds. Returns time as a stirng
+        // > 86400 when time is more than 1 day
+        if ($time > 86400){ // when time is more than a day
+            return gmdate("z\d\a\y G\h\\r i\m\i\\n", $time);
+        } else if ($time > 3600) { // when time is more than an hour
+            return gmdate("G\h\\r i\m\i\\n s\s", $time);
+        } else { // return minutes and seconds
+            return gmdate("i\m\i\\n s\s", $time);
+        }
+    }
+
+    function generateCallerNumDatatable($data_arr) {
+        $iterator = 0;
+        foreach ($data_arr as $key => $value) {
+            $total = $value['ANSWERED'] + $value['NO ANSWER'] + $value['BUSY'] + $value['FAILED'];
+            echo "<tr>";
+            echo "<td><b>" . ++$iterator . "</b></td>";
+            echo "<td>" . $value['Name'] . "</td>";
+            echo "<td>" . $value['Department'] . "</td>";
+            echo "<td>" . $key . "</td>";
+            echo "<td>" . convertDate($value['call time']) . "</td>";
+            echo "<td>" . $value['ANSWERED'] . "</td>";
+            echo "<td>" . $value['NO ANSWER'] . "</td>";
+            echo "<td>" . $value['BUSY'] . "</td>";
+            echo "<td>" . $value['FAILED'] . "</td>";
+            echo "<td>" . $total . "</td>";
+            echo "</tr>";
+        }
+    }
 
 
 

@@ -26,7 +26,7 @@ $(document).ready(function () {
     // handling big button
     const bigButton = document.getElementById('bigbutton');
     const hiddenDiv = document.getElementById('hiddenDiv');
-
+    var navbar = $("#top_navbar");
 
     bigButton.onclick = function () {
         if (hiddenDiv.style.display === "none") {
@@ -35,7 +35,7 @@ $(document).ready(function () {
             bigButton.classList.add('btn-secondary');
             bigButton.classList.remove('btn-primary');
             $([document.documentElement, document.body]).animate({
-                scrollTop: $("#inbound_caller_data_heading").offset().top
+                scrollTop: $("#hr_below_bigButton").offset().top - navbar.height()
             }, 1000);
         } else {
             hiddenDiv.style.display = "none";
