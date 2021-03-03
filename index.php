@@ -76,9 +76,9 @@
             <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
                 <div class="navbar-nav">
                     <a class="nav-item nav-link active" href="#">Home <span class="sr-only">(current)</span></a>
-                    <a class="nav-item nav-link" href="#">Features</a>
-                    <a class="nav-item nav-link" href="#">Pricing</a>
-                    <a class="nav-item nav-link disabled" href="#">Disabled</a>
+                    <a class="nav-item nav-link" href="#">Department</a>
+                    <a class="nav-item nav-link" href="rawdata.php">Raw-data</a>
+                    <a class="nav-item nav-link" href="#">Info</a>
                 </div>
             </div>
         </div>
