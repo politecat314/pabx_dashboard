@@ -203,6 +203,8 @@
 
     }
 
+    
+
 
     
 
@@ -291,6 +293,8 @@
 
     }
 
+    
+
     // start of sorting
     ksort($department_donuts); // for department donuts selector
     ksort($caller_num_data);
@@ -335,6 +339,8 @@
         }
     }
 
+    
+
     // start of making parsing easier for js. Used in calls per day graph
     $days_answered = array();
     $days_no_answer = array();
@@ -342,12 +348,12 @@
     $days_failed = array();
     $days_total = array();
 
-    foreach($days as $value) {
-        array_push($days_answered, $value['ANSWERED']);
-        array_push($days_no_answer, $value['NO ANSWER']);
-        array_push($days_busy, $value['BUSY']);
-        array_push($days_failed, $value['FAILED']);
-        array_push($days_total, array_sum($value));
+    foreach($days as $va) {
+        array_push($days_answered, $va['ANSWERED']);
+        array_push($days_no_answer, $va['NO ANSWER']);
+        array_push($days_busy, $va['BUSY']);
+        array_push($days_failed, $va['FAILED']);
+        array_push($days_total, array_sum($va));
     }
     
     $days_disposition = array( 
@@ -360,5 +366,5 @@
     // end of making parsing easier for js. Used in calls per day graph
 
 
-
+    
 ?>

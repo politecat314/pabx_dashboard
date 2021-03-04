@@ -141,7 +141,7 @@
             <div class="text-center p-3" style="background-color:#85929E">
             By Aman.
             <a class="text-light" href="https://drive.google.com/file/d/1fUzPoq-PpmsJGjD1Elv6IpoxyyzRFhrx/view?usp=sharing">API Documentation.</a> 
-            <a class="text-light" href="filename_5205.csv">Download csv</a>
+            <a class="text-light" href="<?php echo $datafile;?>">Download csv</a>
         </div>
             <!-- Copyright -->
         </footer>

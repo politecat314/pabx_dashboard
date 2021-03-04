@@ -199,7 +199,7 @@
         <div class="text-center p-3" style="background-color:#85929E">
             By Aman.
             <a class="text-light" href="https://drive.google.com/file/d/1fUzPoq-PpmsJGjD1Elv6IpoxyyzRFhrx/view?usp=sharing">API Documentation.</a> 
-            <a class="text-light" href="filename_5205.csv">Download csv</a>
+            <a class="text-light" href="<?php echo $datafile;?>">Download csv</a>
         </div>
         <!-- Copyright -->
     </footer>
@@ -227,6 +227,10 @@
     <!--select picker-->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/js/bootstrap-select.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/js/i18n/defaults-*.min.js"></script>
+
+    
+    <!-- label plugin for chartjs -->
+    <script src="https://cdn.jsdelivr.net/gh/emn178/chartjs-plugin-labels/src/chartjs-plugin-labels.js"></script>
 
     <script>
         // previous colours used in canvasjs
@@ -299,6 +303,11 @@
                             beginAtZero: true
                         }
                     }]
+                },
+                plugins: {
+                    labels: {
+                        render: 'value',
+                    }
                 }
             }
         });
@@ -343,7 +352,14 @@
                         display: true,
                         text: donut_title,
                         fontSize: 15,
+                    },
+                    plugins: {
+                    labels: {
+                        render: 'percentage',
+                        fontColor: 'black',
+                        fontStyle: 'bold',
                     }
+                }
                 }
             });
         }

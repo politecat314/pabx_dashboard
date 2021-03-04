@@ -22,8 +22,6 @@
             padding-bottom: 20px !important;
             margin-bottom: 0rem;
         }
-
-        
     </style>
 
 
@@ -78,7 +76,7 @@
                     <a class="nav-item nav-link active" href="#">Home <span class="sr-only">(current)</span></a>
                     <a class="nav-item nav-link" href="department.php">Department</a>
                     <a class="nav-item nav-link" href="rawdata.php">Raw-data</a>
-                    
+
                 </div>
             </div>
         </div>
@@ -290,15 +288,15 @@
 
 
     </div>
-    
+
     <div style="background-color:#F8F8F8">
-    <hr>
-    <div class="container">
-        <div class="row">
-            <canvas id="callByDispositionBarChart" width="400" height="200"></canvas>
+        <hr>
+        <div class="container">
+            <div class="row">
+                <canvas id="callByDispositionBarChart" width="400" height="200"></canvas>
+            </div>
         </div>
-    </div>
-    <hr>
+        <hr>
     </div>
 
 
@@ -326,7 +324,7 @@
                     <?php
                     $iterator = 0;
                     generateCallerNumDatatable($caller_num_data);
-                    
+
                     ?>
                 </tbody>
             </table>
@@ -336,162 +334,162 @@
     <hr id="hr_above_bigButton">
     <div class="container">
         <button id="bigbutton" type="button" class="btn btn-primary btn-lg btn-block">Show section statistics</button>
-        </div><hr id="hr_below_bigButton">
+    </div>
+    <hr id="hr_below_bigButton">
     <div id="hiddenDiv" style="display: none;">
 
         <div class="container datatable-container">
-            
-                <div class="">
-                    <h2 id="inbound_caller_data_heading">Incoming caller data</h2>
-                </div>
 
-                <div class="">
-                    <table id="inbound_caller_data" class="display table">
-                        <thead>
-                            <tr>
-                                <th>#</th>
-                                <th>Name</th>
-                                <th>Department</th>
-                                <th>Callee number</th>
-                                <th>Total call time</th>
-                                <th>ANSWERED</th>
-                                <th>NO ANSWER</th>
-                                <th>BUSY</th>
-                                <th>FAILED</th>
-                                <th>Total</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <?php
-                            
-                            generateCallerNumDatatable($caller_num_data_by_userfield['Inbound']);
-                            
-                            ?>
-                        </tbody>
-                    </table>
+            <div class="">
+                <h2 id="inbound_caller_data_heading">Incoming caller data</h2>
+            </div>
+
+            <div class="">
+                <table id="inbound_caller_data" class="display table">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Name</th>
+                            <th>Department</th>
+                            <th>Callee number</th>
+                            <th>Total call time</th>
+                            <th>ANSWERED</th>
+                            <th>NO ANSWER</th>
+                            <th>BUSY</th>
+                            <th>FAILED</th>
+                            <th>Total</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php
+
+                        generateCallerNumDatatable($caller_num_data_by_userfield['Inbound']);
+
+                        ?>
+                    </tbody>
+                </table>
 
 
 
-                </div>
+            </div>
 
-            
+
         </div>
 
         <hr />
         <div class="container datatable-container">
-            
-                <div class="">
-                    <h2 id="internal_caller_data_heading">Internal caller data</h2>
-                </div>
 
-                <div class="">
-                    <table id="internal_caller_data" class="display table">
-                        <thead>
-                            <tr>
-                                <th>#</th>
-                                <th>Name</th>
-                                <th>Department</th>
-                                <th>Caller number</th>
-                                <th>Total call time</th>
-                                <th>ANSWERED</th>
-                                <th>NO ANSWER</th>
-                                <th>BUSY</th>
-                                <th>FAILED</th>
-                                <th>Total</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <?php
-                            
-                            generateCallerNumDatatable($caller_num_data_by_userfield['Internal']);
-                            
-                            ?>
-                        </tbody>
-                    </table>
+            <div class="">
+                <h2 id="internal_caller_data_heading">Internal caller data</h2>
+            </div>
+
+            <div class="">
+                <table id="internal_caller_data" class="display table">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Name</th>
+                            <th>Department</th>
+                            <th>Caller number</th>
+                            <th>Total call time</th>
+                            <th>ANSWERED</th>
+                            <th>NO ANSWER</th>
+                            <th>BUSY</th>
+                            <th>FAILED</th>
+                            <th>Total</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php
+
+                        generateCallerNumDatatable($caller_num_data_by_userfield['Internal']);
+
+                        ?>
+                    </tbody>
+                </table>
 
 
 
-                </div>
+            </div>
 
-            
+
         </div>
 
         <hr />
         <div class="container datatable-container">
-            
-                <div class="">
-                    <h2 id="outbound_caller_data_heading">Outgoing caller data</h2>
-                </div>
 
-                <div class="">
-                    <table id="outbound_caller_data" class="display table">
-                        <thead>
-                            <tr>
-                                <th>#</th>
-                                <th>Name</th>
-                                <th>Department</th>
-                                <th>Caller number</th>
-                                <th>Total call time</th>
-                                <th>ANSWERED</th>
-                                <th>NO ANSWER</th>
-                                <th>BUSY</th>
-                                <th>FAILED</th>
-                                <th>Total</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <?php
-                            
-                            generateCallerNumDatatable($caller_num_data_by_userfield['Outbound']);
-                            
-                            ?>
-                        </tbody>
-                    </table>
+            <div class="">
+                <h2 id="outbound_caller_data_heading">Outgoing caller data</h2>
+            </div>
+
+            <div class="">
+                <table id="outbound_caller_data" class="display table">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Name</th>
+                            <th>Department</th>
+                            <th>Caller number</th>
+                            <th>Total call time</th>
+                            <th>ANSWERED</th>
+                            <th>NO ANSWER</th>
+                            <th>BUSY</th>
+                            <th>FAILED</th>
+                            <th>Total</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php
+
+                        generateCallerNumDatatable($caller_num_data_by_userfield['Outbound']);
+
+                        ?>
+                    </tbody>
+                </table>
 
 
 
-                </div>
+            </div>
 
-            
+
         </div>
 
         <hr />
         <div class="container datatable-container">
-            
-                <div class="">
-                    <h2 id="external_caller_data_heading">External caller data</h2>
-                </div>
 
-                <div class="">
-                    <table id="external_caller_data" class="display table">
-                        <thead>
-                            <tr>
-                                <th>#</th>
-                                <th>Name</th>
-                                <th>Department</th>
-                                <th>Callee number</th>
-                                <th>Total call time</th>
-                                <th>ANSWERED</th>
-                                <th>NO ANSWER</th>
-                                <th>BUSY</th>
-                                <th>FAILED</th>
-                                <th>Total</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <?php
-                            
-                            generateCallerNumDatatable($caller_num_data_by_userfield['External']);
-                            
-                            ?>
-                        </tbody>
-                    </table>
+            <div class="">
+                <h2 id="external_caller_data_heading">External caller data</h2>
+            </div>
 
+            <div class="">
+                <table id="external_caller_data" class="display table">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Name</th>
+                            <th>Department</th>
+                            <th>Callee number</th>
+                            <th>Total call time</th>
+                            <th>ANSWERED</th>
+                            <th>NO ANSWER</th>
+                            <th>BUSY</th>
+                            <th>FAILED</th>
+                            <th>Total</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php
+                        generateCallerNumDatatable($caller_num_data_by_userfield['External']);
+
+                        ?>
+                    </tbody>
+                </table>
 
 
-                </div>
 
-            
+            </div>
+
+
         </div>
 
 
@@ -504,17 +502,17 @@
 
     <!-- Footer -->
     <div style="padding-top:2rem">
-    <footer class="bg-light text-center text-lg-start">
+        <footer class="bg-light text-center text-lg-start">
 
 
-        <!-- Copyright -->
-        <div class="text-center p-3" style="background-color:#85929E">
-            By Aman.
-            <a class="text-light" href="https://drive.google.com/file/d/1fUzPoq-PpmsJGjD1Elv6IpoxyyzRFhrx/view?usp=sharing">API Documentation.</a> 
-            <a class="text-light" href="filename_5205.csv">Download csv</a>
-        </div>
-        <!-- Copyright -->
-    </footer>
+            <!-- Copyright -->
+            <div class="text-center p-3" style="background-color:#85929E">
+                By Aman.
+                <a class="text-light" href="https://drive.google.com/file/d/1fUzPoq-PpmsJGjD1Elv6IpoxyyzRFhrx/view?usp=sharing">API Documentation.</a>
+                <a class="text-light" href="<?php echo $datafile;?>">Download csv</a>
+            </div>
+            <!-- Copyright -->
+        </footer>
     </div>
     <!-- Footer -->
 
@@ -540,6 +538,9 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/js/bootstrap-select.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/js/i18n/defaults-*.min.js"></script>
 
+    <!-- label plugin for chartjs -->
+    <script src="https://cdn.jsdelivr.net/gh/emn178/chartjs-plugin-labels/src/chartjs-plugin-labels.js"></script>
+
     <script>
         // previous colours used in canvasjs
         previousCanvasJSColors = ["#9BBB58", "#C0504E", "#4F81BC", "#23BFAA", ];
@@ -561,56 +562,57 @@
             data: {
                 labels: Object.keys(days),
                 datasets: [{
-                    label: 'Answered',
-                    data: days_disposition[0],
-                    backgroundColor: 'rgba(75, 192, 192, 0)',
-                    borderColor: 'rgba(75, 192, 192, 1)',
-                    // borderWidth: 1
-                },{
-                    label: 'No answer',
-                    data: days_disposition[1],
-                    backgroundColor: 'rgba(255, 99, 132, 0)',
-                    borderColor: 'rgba(255, 99, 132, 1)',
-                    hidden:true
-                    // borderWidth: 1
-                },{
-                    label: 'Busy',
-                    data: days_disposition[2],
-                    backgroundColor: 'rgba(54, 162, 235, 0)',
-                    borderColor: 'rgba(54, 162, 235, 1)',
-                    hidden:true
-                    // borderWidth: 1
-                },{
-                    label: 'Failed',
-                    data: days_disposition[3],
-                    backgroundColor: 'rgba(255, 206, 86, 0)',
-                    borderColor: 'rgba(255, 206, 86, 1)',
-                    hidden:true
-                    // borderWidth: 1
-                },
-                {
-                    label: 'Total',
-                    data: days_disposition[4],
-                    backgroundColor: 'rgba(153, 102, 255, 0)',
-                    borderColor: 'rgba(153, 102, 255, 1)',
-                    // backgroundColor: [
-                    //     'rgba(255, 99, 132, 0.2)', // red
-                    //     'rgba(54, 162, 235, 0.2)',
-                    //     'rgba(255, 206, 86, 0.2)',
-                    //     'rgba(75, 192, 192, 0.2)', // light green
-                    //     'rgba(153, 102, 255, 0.2)',
-                    //     'rgba(255, 159, 64, 0.2)'
-                    // ],
-                    // borderColor: [
-                    //     'rgba(255, 99, 132, 1)', // red
-                    //     'rgba(54, 162, 235, 1)',
-                    //     'rgba(255, 206, 86, 1)',
-                    //     'rgba(75, 192, 192, 1)', // light green
-                    //     'rgba(153, 102, 255, 1)',
-                    //     'rgba(255, 159, 64, 1)'
-                    // ],
-                    // borderWidth: 1
-                },]
+                        label: 'Answered',
+                        data: days_disposition[0],
+                        backgroundColor: 'rgba(75, 192, 192, 0)',
+                        borderColor: 'rgba(75, 192, 192, 1)',
+                        // borderWidth: 1
+                    }, {
+                        label: 'No answer',
+                        data: days_disposition[1],
+                        backgroundColor: 'rgba(255, 99, 132, 0)',
+                        borderColor: 'rgba(255, 99, 132, 1)',
+                        hidden: false
+                        // borderWidth: 1
+                    }, {
+                        label: 'Busy',
+                        data: days_disposition[2],
+                        backgroundColor: 'rgba(54, 162, 235, 0)',
+                        borderColor: 'rgba(54, 162, 235, 1)',
+                        hidden: false
+                        // borderWidth: 1
+                    }, {
+                        label: 'Failed',
+                        data: days_disposition[3],
+                        backgroundColor: 'rgba(255, 206, 86, 0)',
+                        borderColor: 'rgba(255, 206, 86, 1)',
+                        hidden: false
+                        // borderWidth: 1
+                    },
+                    {
+                        label: 'Total',
+                        data: days_disposition[4],
+                        backgroundColor: 'rgba(153, 102, 255, 0)',
+                        borderColor: 'rgba(153, 102, 255, 1)',
+                        // backgroundColor: [
+                        //     'rgba(255, 99, 132, 0.2)', // red
+                        //     'rgba(54, 162, 235, 0.2)',
+                        //     'rgba(255, 206, 86, 0.2)',
+                        //     'rgba(75, 192, 192, 0.2)', // light green
+                        //     'rgba(153, 102, 255, 0.2)',
+                        //     'rgba(255, 159, 64, 0.2)'
+                        // ],
+                        // borderColor: [
+                        //     'rgba(255, 99, 132, 1)', // red
+                        //     'rgba(54, 162, 235, 1)',
+                        //     'rgba(255, 206, 86, 1)',
+                        //     'rgba(75, 192, 192, 1)', // light green
+                        //     'rgba(153, 102, 255, 1)',
+                        //     'rgba(255, 159, 64, 1)'
+                        // ],
+                        // borderWidth: 1
+                    },
+                ]
             },
             options: {
                 scales: {
@@ -627,7 +629,8 @@
                 },
                 legend: {
                     display: true
-                }
+                },
+                
             }
         });
     </script>
@@ -669,11 +672,18 @@
                     display: false,
                     text: 'Phone call status (overall)',
                     //fontSize: 20
+                },
+                plugins: {
+                    labels: {
+                        render: 'percentage',
+                        fontColor: 'black',
+                        fontStyle: 'bold',
+                    }
                 }
             }
         });
     </script>
-<script>
+    <script>
         // call by disposition bar chart
         const answered = <?php echo json_encode($answered, JSON_NUMERIC_CHECK); ?>;
         const no_answer = <?php echo json_encode($no_answer, JSON_NUMERIC_CHECK); ?>;
@@ -722,6 +732,13 @@
                 ],
             },
             options: {
+                plugins: {
+                    labels: {
+                        // render 'label', 'value', 'percentage', 'image' or custom function, default is 'percentage'
+                        render: 'value',
+                    }
+
+                },
                 responsive: true,
                 legend: {
                     position: "top"
@@ -782,11 +799,18 @@
                     display: false,
                     text: 'Phone call status (overall)',
                     //fontSize: 20
+                },
+                plugins: {
+                    labels: {
+                        render: 'percentage',
+                        fontColor: 'white',
+                        fontStyle: 'bold',
+                    }
                 }
             }
         });
     </script>
-    
+
 
 
     <script>
