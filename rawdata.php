@@ -162,6 +162,7 @@
     <script src="/optimized/scripts/vfs_fonts.js"></script>
     <script src="/optimized/scripts/buttons.html5.min.js"></script>
     <script src="/optimized/scripts/buttons.print.min.js"></script>
+    <script src="/optimized/scripts/dataTablesDateSort.js"></script>
 
 
 

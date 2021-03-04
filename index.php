@@ -532,6 +532,7 @@
     <script src="/optimized/scripts/vfs_fonts.js"></script>
     <script src="/optimized/scripts/buttons.html5.min.js"></script>
     <script src="/optimized/scripts/buttons.print.min.js"></script>
+    <script src="/optimized/scripts/dataTablesDateSort.js"></script>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.min.js"></script>
 

@@ -1,4 +1,6 @@
 $(document).ready(function () {
+    
+
     // selectpicker
     $('select').selectpicker();
 
@@ -8,7 +10,10 @@ $(document).ready(function () {
         dom: 'Blfrtip',
         buttons: [
             'copy', 'csv', 'excel', 'pdf', 'print'
-        ]
+        ],
+        columnDefs: [
+                     { type: 'time-elapsed-dhms', targets: 4 }
+                    ]
     }
 
 
@@ -22,7 +27,10 @@ $(document).ready(function () {
         pageLength:-1,
         buttons: [
             'copy', 'csv', 'excel', 'pdf', 'print'
-        ]
+        ],
+        columnDefs: [
+                     { type: 'time-elapsed-dhms', targets: 2 }
+                    ]
     });
 
 // "order": [[ 3, "asc" ]]
