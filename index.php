@@ -563,27 +563,27 @@
                 datasets: [{
                     label: 'Answered',
                     data: days_disposition[0],
-                    backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                    backgroundColor: 'rgba(75, 192, 192, 0)',
                     borderColor: 'rgba(75, 192, 192, 1)',
                     // borderWidth: 1
                 },{
                     label: 'No answer',
                     data: days_disposition[1],
-                    backgroundColor: 'rgba(255, 99, 132, 0.2)',
+                    backgroundColor: 'rgba(255, 99, 132, 0)',
                     borderColor: 'rgba(255, 99, 132, 1)',
                     hidden:true
                     // borderWidth: 1
                 },{
                     label: 'Busy',
                     data: days_disposition[2],
-                    backgroundColor: 'rgba(54, 162, 235, 0.2)',
+                    backgroundColor: 'rgba(54, 162, 235, 0)',
                     borderColor: 'rgba(54, 162, 235, 1)',
                     hidden:true
                     // borderWidth: 1
                 },{
                     label: 'Failed',
                     data: days_disposition[3],
-                    backgroundColor: 'rgba(255, 206, 86, 0.2)',
+                    backgroundColor: 'rgba(255, 206, 86, 0)',
                     borderColor: 'rgba(255, 206, 86, 1)',
                     hidden:true
                     // borderWidth: 1
@@ -591,7 +591,7 @@
                 {
                     label: 'Total',
                     data: days_disposition[4],
-                    backgroundColor: 'rgba(153, 102, 255, 0.2)',
+                    backgroundColor: 'rgba(153, 102, 255, 0)',
                     borderColor: 'rgba(153, 102, 255, 1)',
                     // backgroundColor: [
                     //     'rgba(255, 99, 132, 0.2)', // red
@@ -631,6 +631,9 @@
             }
         });
     </script>
+
+
+
     <script>
         // Disposition donut chart
         const disposition = <?php echo json_encode($disposition, JSON_NUMERIC_CHECK); ?>;
@@ -670,53 +673,7 @@
             }
         });
     </script>
-
-    <script>
-        // Userfield Donut
-        const userfield = <?php echo json_encode($userfield, JSON_NUMERIC_CHECK); ?>;
-
-        function sum(array) {
-            total = 0;
-            Object.values(array).forEach(element => total += element);
-            return total;
-        }
-
-
-        var ctx2 = document.getElementById('donutUserfield').getContext('2d');
-        // Disposition donut
-        var myDoughnutChart = new Chart(ctx2, {
-            type: 'doughnut',
-            data: {
-                labels: Object.keys(userfield),
-                datasets: [{
-                    //label: '# of Tomatoes',
-                    data: [sum(userfield['Inbound']), sum(userfield['Internal']), sum(userfield['Outbound']), sum(userfield['External'])],
-                    backgroundColor: [
-                        'rgba(0, 63, 92,0.8)',
-                        'rgba(122, 81, 149,0.8)',
-                        'rgba(239, 86, 117,0.8)',
-                        'rgba(255, 166, 0,0.8)'
-                    ],
-                    borderColor: [
-                        'rgba(0, 63, 92,1)',
-                        'rgba(122, 81, 149,1)',
-                        'rgba(239, 86, 117,1)',
-                        'rgba(255, 166, 0,1)'
-
-                    ],
-                    borderWidth: 1
-                }]
-            },
-            options: {
-                title: {
-                    display: false,
-                    text: 'Phone call status (overall)',
-                    //fontSize: 20
-                }
-            }
-        });
-    </script>
-    <script>
+<script>
         // call by disposition bar chart
         const answered = <?php echo json_encode($answered, JSON_NUMERIC_CHECK); ?>;
         const no_answer = <?php echo json_encode($no_answer, JSON_NUMERIC_CHECK); ?>;
@@ -784,6 +741,52 @@
             }
         });
     </script>
+    <script>
+        // Userfield Donut
+        const userfield = <?php echo json_encode($userfield, JSON_NUMERIC_CHECK); ?>;
+
+        function sum(array) {
+            total = 0;
+            Object.values(array).forEach(element => total += element);
+            return total;
+        }
+
+
+        var ctx2 = document.getElementById('donutUserfield').getContext('2d');
+        // Disposition donut
+        var myDoughnutChart = new Chart(ctx2, {
+            type: 'doughnut',
+            data: {
+                labels: Object.keys(userfield),
+                datasets: [{
+                    //label: '# of Tomatoes',
+                    data: [sum(userfield['Inbound']), sum(userfield['Internal']), sum(userfield['Outbound']), sum(userfield['External'])],
+                    backgroundColor: [
+                        'rgba(0, 63, 92,0.8)',
+                        'rgba(122, 81, 149,0.8)',
+                        'rgba(239, 86, 117,0.8)',
+                        'rgba(255, 166, 0,0.8)'
+                    ],
+                    borderColor: [
+                        'rgba(0, 63, 92,1)',
+                        'rgba(122, 81, 149,1)',
+                        'rgba(239, 86, 117,1)',
+                        'rgba(255, 166, 0,1)'
+
+                    ],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                title: {
+                    display: false,
+                    text: 'Phone call status (overall)',
+                    //fontSize: 20
+                }
+            }
+        });
+    </script>
+    
 
 
     <script>
