@@ -136,7 +136,14 @@
     // start of defining variables to be displayed
 
     $days = array(); // days and number of calls that day. For the Calls per day graph
-    // echo date("j M",strtotime($csv[0][$ref['start time']]));
+
+    $s = strtotime($csv[0][$ref['start time']]); // earliest date (date filter applied if applicable)
+    $e = strtotime($csv[count($csv)-1][$ref['start time']]); // latest date (date filter applied if applicable)
+    $days_between = ceil(abs($e - $s) / 86400); // number of days. For example, 20th to 25th is 6 days
+    for($i=0; $i<$days_between; $i++) { // adding all the days to $days for Calls per day graph
+        $days[date("j M",$s+$i*86400)] = 0;
+    }
+
 
     $disposition = array(
         "ANSWERED" => 0,
@@ -245,11 +252,7 @@
 
         // start of calls per day counter
         $current_day = date("j M",strtotime($csv[$i][$ref['start time']]));
-        if (array_key_exists($current_day,$days)) {
-            $days[$current_day] += 1;
-        } else {
-            $days[$current_day] = 1;
-        }
+        $days[$current_day] += 1;
         // end of calls per day countr
 
         // start of counting disposition
