@@ -1,4 +1,6 @@
 <?php
+    $datafile = "big.csv";
+
     // start of importing contactlist
     $contactlist = array(); // csv data imported into this array
     
@@ -19,7 +21,7 @@
 
 
     // start of import data from csv file
-    $CSVfp = fopen("filename_5205.csv", "r");
+    $CSVfp = fopen($datafile, "r");
     $csv = array(); // all the data is stored in this array
 
     if($CSVfp !== FALSE) {
@@ -176,6 +178,28 @@
         "External" => array()
     );
 
+    foreach($contactlist as $key => $value) { // for all the datatables
+        $current_caller_number_data_array = array(
+            'Name'=> $value[1], 
+            'Department'=> $value[0],
+            'NO ANSWER'=>0,
+            'ANSWERED'=>0,
+            'FAILED'=>0,
+            'BUSY'=>0,
+            'call time'=>0
+        );
+
+        $caller_num_data[$key] = $current_caller_number_data_array;
+        
+        foreach($caller_num_data_by_userfield as $k => $v) {
+            $caller_num_data_by_userfield[$k][$key] = $current_caller_number_data_array;
+        }
+
+    }
+
+
+    
+
     // graph arrays
     $answered = array();
     $graph_ref = array(); // ref array for graphs
@@ -209,15 +233,7 @@
         $current_name = $contactlist[$current_caller_number][1];
         $current_disposition = $csv[$i][$ref['disposition']]; // select current disposition on line i
         $current_talk_time = $csv[$i][$ref['call time']]; // select current disposition on line i
-        $current_caller_number_data_array = array(
-            'Name'=> $current_name, 
-            'Department'=> $current_department,
-            'NO ANSWER'=>0,
-            'ANSWERED'=>0,
-            'FAILED'=>0,
-            'BUSY'=>0,
-            'call time'=>0
-        );
+        
         // start of deparment datatable
         $department_datatable[$current_department][$current_disposition] += 1;
         $department_datatable[$current_department]['call time'] += $current_talk_time;
@@ -245,18 +261,12 @@
         // end of counting userfield
 
         // start of caller number datatables (index.php)
-        if (!array_key_exists($current_caller_number,$caller_num_data)) { // checking if caller number already exists inside caller_num_data
-            $caller_num_data[$current_caller_number] = $current_caller_number_data_array; // index.php datatable
-        }
         $caller_num_data[$current_caller_number][$current_disposition] += 1;
         $caller_num_data[$current_caller_number]['call time'] += $current_talk_time;
         // end of caller number datatables (index.php)
 
 
         // start of datatables grouped by userfield
-        if (!array_key_exists($current_caller_number,$caller_num_data_by_userfield[$current_userfield])) {
-            $caller_num_data_by_userfield[$current_userfield][$current_caller_number] = $current_caller_number_data_array; 
-        }
         $caller_num_data_by_userfield[$current_userfield][$current_caller_number][$current_disposition] += 1;
         $caller_num_data_by_userfield[$current_userfield][$current_caller_number]['call time'] += $current_talk_time;
         // end of datatables grouped by userfield
