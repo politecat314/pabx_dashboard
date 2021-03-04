@@ -134,6 +134,12 @@
     // end of sorting csv by caller number
 
     // start of defining variables to be displayed
+    $disposition = array(
+        "ANSWERED" => 0,
+        "NO ANSWER" => 0,
+        "BUSY" => 0,
+        "FAILED" => 0 
+    );
 
     $days = array(); // days and number of calls that day. For the Calls per day graph
 
@@ -141,16 +147,9 @@
     $e = strtotime($csv[count($csv)-1][$ref['start time']]); // latest date (date filter applied if applicable)
     $days_between = ceil(abs($e - $s) / 86400); // number of days. For example, 20th to 25th is 6 days
     for($i=0; $i<$days_between; $i++) { // adding all the days to $days for Calls per day graph
-        $days[date("j M",$s+$i*86400)] = 0;
+        $days[date("j M",$s+$i*86400)] = $disposition;
     }
 
-
-    $disposition = array(
-        "ANSWERED" => 0,
-        "NO ANSWER" => 0,
-        "BUSY" => 0,
-        "FAILED" => 0 
-    );
 
     $userfield = array(
        "Inbound" => $disposition,
@@ -252,7 +251,7 @@
 
         // start of calls per day counter
         $current_day = date("j M",strtotime($csv[$i][$ref['start time']]));
-        $days[$current_day] += 1;
+        $days[$current_day][$current_disposition] += 1;
         // end of calls per day countr
 
         // start of counting disposition
@@ -335,6 +334,30 @@
             echo "</tr>";
         }
     }
+
+    // start of making parsing easier for js. Used in calls per day graph
+    $days_answered = array();
+    $days_no_answer = array();
+    $days_busy = array();
+    $days_failed = array();
+    $days_total = array();
+
+    foreach($days as $value) {
+        array_push($days_answered, $value['ANSWERED']);
+        array_push($days_no_answer, $value['NO ANSWER']);
+        array_push($days_busy, $value['BUSY']);
+        array_push($days_failed, $value['FAILED']);
+        array_push($days_total, array_sum($value));
+    }
+    
+    $days_disposition = array( 
+        $days_answered,
+        $days_no_answer,
+        $days_busy,
+        $days_failed,
+        $days_total
+    );
+    // end of making parsing easier for js. Used in calls per day graph
 
 
 

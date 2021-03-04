@@ -87,7 +87,7 @@
 
     <div class="container" style="padding-top:2rem">
         <div class="row">
-            <canvas id="callsPerDayChart" width="400" height="100"></canvas>
+            <canvas id="callsPerDayChart" width="400" height="150"></canvas>
         </div>
     </div>
     <hr>
@@ -551,6 +551,9 @@
         // Calls per day graph
 
         const days = <?php echo json_encode($days, JSON_NUMERIC_CHECK); ?>;
+        const days_disposition = <?php echo json_encode($days_disposition, JSON_NUMERIC_CHECK); ?>;
+        console.log(days_disposition);
+
         // CHART JS DOC
         var ctx = document.getElementById('callsPerDayChart').getContext('2d');
         var myChart = new Chart(ctx, {
@@ -558,10 +561,38 @@
             data: {
                 labels: Object.keys(days),
                 datasets: [{
-                    label: 'Day',
-                    data: Object.values(days),
+                    label: 'Answered',
+                    data: days_disposition[0],
                     backgroundColor: 'rgba(75, 192, 192, 0.2)',
                     borderColor: 'rgba(75, 192, 192, 1)',
+                    // borderWidth: 1
+                },{
+                    label: 'No answer',
+                    data: days_disposition[1],
+                    backgroundColor: 'rgba(255, 99, 132, 0.2)',
+                    borderColor: 'rgba(255, 99, 132, 1)',
+                    hidden:true
+                    // borderWidth: 1
+                },{
+                    label: 'Busy',
+                    data: days_disposition[2],
+                    backgroundColor: 'rgba(54, 162, 235, 0.2)',
+                    borderColor: 'rgba(54, 162, 235, 1)',
+                    hidden:true
+                    // borderWidth: 1
+                },{
+                    label: 'Failed',
+                    data: days_disposition[3],
+                    backgroundColor: 'rgba(255, 206, 86, 0.2)',
+                    borderColor: 'rgba(255, 206, 86, 1)',
+                    hidden:true
+                    // borderWidth: 1
+                },
+                {
+                    label: 'Total',
+                    data: days_disposition[4],
+                    backgroundColor: 'rgba(153, 102, 255, 0.2)',
+                    borderColor: 'rgba(153, 102, 255, 1)',
                     // backgroundColor: [
                     //     'rgba(255, 99, 132, 0.2)', // red
                     //     'rgba(54, 162, 235, 0.2)',
@@ -579,7 +610,7 @@
                     //     'rgba(255, 159, 64, 1)'
                     // ],
                     // borderWidth: 1
-                }]
+                },]
             },
             options: {
                 scales: {
@@ -595,7 +626,7 @@
                     fontSize: 20
                 },
                 legend: {
-                    display: false
+                    display: true
                 }
             }
         });
