@@ -158,23 +158,6 @@
        "External" => $disposition 
     );
 
-    $department_datatable = array(); // for department datatable on deparment.php
-    $department_donuts = array(); 
-    // donuts for dropdown departments
-    // $departmetn => $userfield => $disposition
-    foreach ($contactlist as $value) {
-        if (!array_key_exists($value[0], $department_donuts)) {
-            $department_donuts[$value[0]] = $userfield;
-            $department_datatable[$value[0]] = array(
-            "call time" => 0,
-            "ANSWERED" => 0,
-            "NO ANSWER" => 0,
-            "BUSY" => 0,
-            "FAILED" => 0
-            );
-        }
-    }
-
     $caller_num_data = array(); // datatable on index.html
 
     $caller_num_data_by_userfield = array( // caller_number data grouped by userfield
@@ -183,6 +166,12 @@
         "Outbound" => array(),
         "External" => array()
     );
+
+    $department_datatable = array(); // for department datatable on deparment.php
+    $department_donuts = array();
+    $department_employee_donuts = array();
+    // donuts for dropdown departments
+    // $departmetn => $userfield => $disposition
 
     foreach($contactlist as $key => $value) { // for all the datatables
         $current_caller_number_data_array = array(
@@ -201,10 +190,38 @@
             $caller_num_data_by_userfield[$k][$key] = $current_caller_number_data_array;
         }
 
+        if (!array_key_exists($value[0], $department_donuts)) {
+            $department_donuts[$value[0]] = $userfield;
+            $department_datatable[$value[0]] = array(
+                "call time" => 0,
+                "ANSWERED" => 0,
+                "NO ANSWER" => 0,
+                "BUSY" => 0,
+                "FAILED" => 0
+            );
+        }
+
+        if (!array_key_exists($value[0],$department_employee_donuts)) {
+            $department_employee_donuts[$value[0]] = array();    
+        }
+
+        $department_employee_donuts[$value[0]][$key] = array($value[1], $userfield);
+
     }
 
-    
-
+    // foreach($department_employee_donuts as $key=>$value) {
+    //     echo $key;
+    //     echo " :";
+    //     print_r($value); 
+    //     echo "</br>";
+    // }
+    // TODO remove later. department_employee_donuts currently look like: 
+    // department => exit => array(employee name,userfield=>{
+    //     inbound => array(ans, no ans, busy, failed),
+    //     internal => array(ans, no ans, busy, failed),
+    //     outbound => array(ans, no ans, busy, failed),
+    //     external => array(ans, no ans, busy, failed),
+    // })
 
     
 
@@ -247,9 +264,13 @@
         $department_datatable[$current_department]['call time'] += $current_talk_time;
         // end of department datatable
 
-        // start of department donuts
+        // start of department donuts (department.php)
         $department_donuts[$current_department][$current_userfield][$current_disposition] += 1;
-        // end of department donuts
+        // end of department donuts (department.php)
+
+        // start of department employee donuts (department.php)
+        $department_employee_donuts[$current_department][$current_caller_number][1][$current_userfield][$current_disposition] += 1;
+        // end of department employee donuts (department.php)
 
         // start of calls per day counter
         $current_day = date("j M",strtotime($csv[$i][$ref['start time']]));
@@ -365,6 +386,11 @@
     );
     // end of making parsing easier for js. Used in calls per day graph
 
-
+    // foreach($department_employee_donuts as $key=>$value) {
+    //     echo $key;
+    //     echo " :";
+    //     print_r($value); 
+    //     echo "</br>";
+    // }
     
 ?>

@@ -22,8 +22,6 @@
             padding-bottom: 20px !important;
             margin-bottom: 0rem;
         }
-
-        
     </style>
 
 
@@ -78,28 +76,28 @@
                     <a class="nav-item nav-link" href="index.php">Home <span class="sr-only">(current)</span></a>
                     <a class="nav-item nav-link active" href="#">Department</a>
                     <a class="nav-item nav-link" href="rawdata.php">Raw-data</a>
-                    
+
                 </div>
             </div>
         </div>
     </nav>
 
-<div style="background-color:#F8F8F8">
-    <div class="container" style="padding-top:2rem;">
+    <div style="background-color:#F8F8F8">
+        <div class="container" style="padding-top:2rem;">
 
-        <!-- <div class="row">
+            <!-- <div class="row">
             <canvas id="callsPerDayChart" width="400" height="100"></canvas>
         </div> -->
-        <div class="row">
-            <canvas id="callByDispositionBarChart" width="400" height="200"></canvas>
+            <div class="row">
+                <canvas id="callByDispositionBarChart" width="400" height="200"></canvas>
+            </div>
+
+
         </div>
-
-
+        <hr>
     </div>
-    <hr>
-</div>
 
-    
+
     <div class="container datatable-container">
         <div class="">
             <h2>Department data</h2>
@@ -121,7 +119,7 @@
                 <tbody>
                     <?php
                     $iterator = 0;
-                    foreach($department_datatable as $key=>$value) {
+                    foreach ($department_datatable as $key => $value) {
                         $total = $value['ANSWERED'] + $value['NO ANSWER'] + $value['BUSY'] + $value['FAILED'];
                         echo "<tr>";
                         echo "<td><b>" . ++$iterator . "</b></td>";
@@ -134,7 +132,7 @@
                         echo "<td>" . $total . "</td>";
                         echo "</tr>";
                     }
-                    
+
                     ?>
                 </tbody>
             </table>
@@ -160,13 +158,13 @@
                     </select>
                 </div>
                 <div class="col-5" style="padding-left:0px; padding-right:5px">
-                    <select id="department_employee_selector" class="selectpicker" 
-                    data-style="btn-outline-dark" data-live-search="true" data-width="100%" title="Choose an employee">
+                    <select disabled id="department_employee_selector" class="selectpicker" data-style="btn-outline-dark" data-live-search="true" data-width="100%" title="Choose an employee">
                         <?php
-                        foreach ($department_donuts as $dept_name => $value) {
-                            echo "<option>$dept_name</option>";
-                        }
-
+                        // foreach ($department_employee_donuts as $ext) {
+                        //     foreach ($ext as $key => $value) {
+                        //         echo "<option>".$value[0]." (".$key.")</option>";
+                        //     }
+                        // }
                         ?>
                     </select>
                 </div>
@@ -203,17 +201,17 @@
 
     <!-- Footer -->
     <div style="padding-top:2rem">
-    <footer class="bg-light text-center text-lg-start">
+        <footer class="bg-light text-center text-lg-start">
 
 
-        <!-- Copyright -->
-        <div class="text-center p-3" style="background-color:#85929E">
-            By Aman.
-            <a class="text-light" href="https://drive.google.com/file/d/1fUzPoq-PpmsJGjD1Elv6IpoxyyzRFhrx/view?usp=sharing">API Documentation.</a> 
-            <a class="text-light" href="<?php echo $datafile;?>">Download csv</a>
-        </div>
-        <!-- Copyright -->
-    </footer>
+            <!-- Copyright -->
+            <div class="text-center p-3" style="background-color:#85929E">
+                By Aman.
+                <a class="text-light" href="https://drive.google.com/file/d/1fUzPoq-PpmsJGjD1Elv6IpoxyyzRFhrx/view?usp=sharing">API Documentation.</a>
+                <a class="text-light" href="<?php echo $datafile; ?>">Download csv</a>
+            </div>
+            <!-- Copyright -->
+        </footer>
     </div>
     <!-- Footer -->
 
@@ -239,7 +237,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/js/bootstrap-select.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/js/i18n/defaults-*.min.js"></script>
 
-    
+
     <!-- label plugin for chartjs -->
     <script src="https://cdn.jsdelivr.net/gh/emn178/chartjs-plugin-labels/src/chartjs-plugin-labels.js"></script>
 
@@ -247,7 +245,7 @@
         // previous colours used in canvasjs
         previousCanvasJSColors = ["#9BBB58", "#C0504E", "#4F81BC", "#23BFAA", ];
     </script>
-    
+
     <script src='document.js'></script>
 
     <script>
@@ -365,12 +363,12 @@
                         fontSize: 15,
                     },
                     plugins: {
-                    labels: {
-                        render: 'percentage',
-                        fontColor: 'black',
-                        fontStyle: 'bold',
+                        labels: {
+                            render: 'percentage',
+                            fontColor: 'black',
+                            fontStyle: 'bold',
+                        }
                     }
-                }
                 }
             });
         }
@@ -381,31 +379,57 @@
         const department_selector = document.getElementById("department_selector");
         const php_department_donut_data = <?php echo json_encode($department_donuts, JSON_NUMERIC_CHECK); ?>;
         const departmentDonutsContainerDiv = document.getElementById("departmentDonutsContainerDiv");
+    </script>
+
+    <script>
+        const php_department_employee_donut_data = <?php echo json_encode($department_employee_donuts, JSON_NUMERIC_CHECK); ?>;
+
+        $('#department_selector').on('change', function() {
+            generate_graph_button.disabled = false;
+
+            $('#department_employee_selector').prop("disabled", false);
+
+            let curr_department = $('#department_selector').selectpicker('val');
+            $('#department_employee_selector').empty();
+
+            $('#department_employee_selector').append(`<option>All employees</option>`);
+            Object.keys(php_department_employee_donut_data[curr_department]).forEach((key) => {
+                $('#department_employee_selector').append(`<option>${php_department_employee_donut_data[curr_department][key][0]} (${key})</option>`);
+            });
+
+
+            $('#department_employee_selector').selectpicker('refresh');
+            $('#department_employee_selector').selectpicker("val", "All employees");
+        });
+    </script>
+
+    <script>
         generate_graph_button.onclick = function() {
-
-
-
             let current_department = department_selector.value;
+            let curr_employee = $('#department_employee_selector').selectpicker('val');
+            let num = curr_employee.split(" ").pop();
+            num = num.substring(1,num.length-1);
 
             if (current_department === "") { // quit function if no department selected
                 alert("Please select a department to generate graph");
                 return;
             }
             departmentDonutsContainerDiv.style.display = "block";
-            // console.log(php_department_donut_data[current_department]);
 
-            // php_department_donut_data[current_department]['Inbound']
-            // php_department_donut_data[current_department]['Internal']
-            // php_department_donut_data[current_department]['Outbound']
-            drawDepartmentDonut(php_department_donut_data[current_department]['Inbound'], "inboundDepartmentDonut", "Inbound");
-            drawDepartmentDonut(php_department_donut_data[current_department]['Internal'], "internalDepartmentDonut", "Internal");
-            drawDepartmentDonut(php_department_donut_data[current_department]['Outbound'], "outboundDepartmentDonut", "Outbound");
-            drawDepartmentDonut(php_department_donut_data[current_department]['External'], "externalDepartmentDonut", "External");
+            if (curr_employee==="All employees") {
+                drawDepartmentDonut(php_department_donut_data[current_department]['Inbound'], "inboundDepartmentDonut", "Inbound");
+                drawDepartmentDonut(php_department_donut_data[current_department]['Internal'], "internalDepartmentDonut", "Internal");
+                drawDepartmentDonut(php_department_donut_data[current_department]['Outbound'], "outboundDepartmentDonut", "Outbound");
+                drawDepartmentDonut(php_department_donut_data[current_department]['External'], "externalDepartmentDonut", "External");
+            } else {
+                drawDepartmentDonut(php_department_employee_donut_data[current_department][num][1]['Inbound'], "inboundDepartmentDonut", "Inbound");
+                drawDepartmentDonut(php_department_employee_donut_data[current_department][num][1]['Internal'], "internalDepartmentDonut", "Internal");
+                drawDepartmentDonut(php_department_employee_donut_data[current_department][num][1]['Outbound'], "outboundDepartmentDonut", "Outbound");
+                drawDepartmentDonut(php_department_employee_donut_data[current_department][num][1]['External'], "externalDepartmentDonut", "External");
+            }
 
         }
     </script>
-
-
 
 
 
