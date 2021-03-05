@@ -159,8 +159,19 @@
                         ?>
                     </select>
                 </div>
+                <div class="col-5" style="padding-left:0px; padding-right:5px">
+                    <select id="department_employee_selector" class="selectpicker" 
+                    data-style="btn-outline-dark" data-live-search="true" data-width="100%" title="Choose an employee">
+                        <?php
+                        foreach ($department_donuts as $dept_name => $value) {
+                            echo "<option>$dept_name</option>";
+                        }
+
+                        ?>
+                    </select>
+                </div>
                 <div class="col" style="padding-left:0px">
-                    <button type="submit" class="btn btn-primary mb-2" id="generate_graph_button">Generate graphs</button>
+                    <button type="submit" class="btn btn-primary mb-2" id="generate_graph_button" disabled>Generate graphs</button>
                 </div>
             </div>
 
