@@ -12,9 +12,6 @@
     <link rel="stylesheet" href="https://cdn.datatables.net/buttons/1.6.5/css/buttons.dataTables.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
 
-    <!-- Select picker -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/css/bootstrap-select.min.css">
-
 
     <style>
         .jumbotron {
@@ -534,9 +531,6 @@
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.min.js"></script>
 
-    <!--select picker-->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/js/bootstrap-select.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/js/i18n/defaults-*.min.js"></script>
 
     <!-- label plugin for chartjs -->
     <script src="https://cdn.jsdelivr.net/gh/emn178/chartjs-plugin-labels/src/chartjs-plugin-labels.js"></script>
@@ -553,7 +547,7 @@
 
         const days = <?php echo json_encode($days, JSON_NUMERIC_CHECK); ?>;
         const days_disposition = <?php echo json_encode($days_disposition, JSON_NUMERIC_CHECK); ?>;
-        console.log(days_disposition);
+        // console.log(days_disposition);
 
         // CHART JS DOC
         var ctx = document.getElementById('callsPerDayChart').getContext('2d');
@@ -812,79 +806,6 @@
     </script>
 
 
-
-    <script>
-        const drawDepartmentDonut = function(data, elementId, donut_title) {
-            let current_element = document.getElementById(elementId);
-            parentDiv = current_element.parentNode;
-            parentDiv.removeChild(current_element);
-
-            parentDiv.innerHTML += `<canvas id="${elementId}" height=150></canvas>`;
-
-
-            window.myBar = new Chart(document.getElementById(elementId).getContext("2d"), { // todo change to current_element
-                type: 'doughnut',
-                data: {
-                    labels: Object.keys(data),
-                    datasets: [{
-                        // label: 'External',
-                        data: Object.values(data),
-                        backgroundColor: [
-                            'rgba(75, 192, 192, 0.8)',
-                            'rgba(255, 99, 132, 0.8)',
-                            'rgba(54, 162, 235, 0.8)',
-                            'rgba(255, 206, 86, 0.8)',
-
-                        ],
-                        borderColor: [
-                            'rgba(75, 192, 192, 1)',
-                            'rgba(255,99,132,1)',
-                            'rgba(54, 162, 235, 1)',
-                            'rgba(255, 206, 86, 1)',
-
-                        ],
-                        borderWidth: 1
-                    }]
-                },
-                options: {
-                    title: {
-                        display: true,
-                        text: donut_title,
-                        fontSize: 15,
-                    }
-                }
-            });
-        }
-
-
-        // generate graph button clicked
-        const generate_graph_button = document.getElementById("generate_graph_button");
-        const department_selector = document.getElementById("department_selector");
-        const php_department_donut_data = <?php echo json_encode($department_donuts, JSON_NUMERIC_CHECK); ?>;
-        const departmentDonutsContainerDiv = document.getElementById("departmentDonutsContainerDiv");
-        generate_graph_button.onclick = function() {
-
-
-
-            let current_department = department_selector.value;
-
-            if (current_department === "") { // quit function if no department selected
-                alert("Please select a department to generate graph");
-                return;
-            }
-            departmentDonutsContainerDiv.style.display = "block";
-            // console.log(php_department_donut_data[current_department]);
-
-            // php_department_donut_data[current_department]['Inbound']
-            // php_department_donut_data[current_department]['Internal']
-            // php_department_donut_data[current_department]['Outbound']
-            drawDepartmentDonut(php_department_donut_data[current_department]['Inbound'], "inboundDepartmentDonut", "Inbound");
-            drawDepartmentDonut(php_department_donut_data[current_department]['Internal'], "internalDepartmentDonut", "Internal");
-            drawDepartmentDonut(php_department_donut_data[current_department]['Outbound'], "outboundDepartmentDonut", "Outbound");
-            drawDepartmentDonut(php_department_donut_data[current_department]['External'], "externalDepartmentDonut", "External");
-
-        }
-    </script>
 
 
 

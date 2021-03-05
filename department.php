@@ -247,7 +247,13 @@
     </script>
 
     <script src='document.js'></script>
+    <script>
+     $(document).ready(function () {
 
+    // selectpicker
+    $('select').selectpicker();
+     });
+    </script>
     <script>
         // call by disposition bar chart
         const answered = <?php echo json_encode($answered, JSON_NUMERIC_CHECK); ?>;
@@ -420,9 +426,9 @@
             departmentDonutsContainerDiv.style.display = "block";
 
             if (curr_employee==="All employees") {
-                drawDepartmentDonut(php_department_donut_data[current_department]['Inbound'], "inboundDepartmentDonut", "Inbound");
+                drawDepartmentDonut(php_department_donut_data[current_department]['Inbound'], "inboundDepartmentDonut", "Incoming");
                 drawDepartmentDonut(php_department_donut_data[current_department]['Internal'], "internalDepartmentDonut", "Internal");
-                drawDepartmentDonut(php_department_donut_data[current_department]['Outbound'], "outboundDepartmentDonut", "Outbound");
+                drawDepartmentDonut(php_department_donut_data[current_department]['Outbound'], "outboundDepartmentDonut", "Outgoing");
                 drawDepartmentDonut(php_department_donut_data[current_department]['External'], "externalDepartmentDonut", "External");
             } else {
                 drawDepartmentDonut(php_department_employee_donut_data[current_department][num][1]['Inbound'], "inboundDepartmentDonut", "Inbound");

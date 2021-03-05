@@ -1,9 +1,6 @@
 $(document).ready(function () {
     
 
-    // selectpicker
-    $('select').selectpicker();
-
 
     data_table_object = {
         "lengthMenu": [[10, 25, 50, -1], [10, 25, 50, "All"]],
