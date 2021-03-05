@@ -82,7 +82,7 @@
         </div>
     </nav>
 
-    <div style="background-color:#F8F8F8">
+    <div>
         <div class="container" style="padding-top:2rem;">
 
             <!-- <div class="row">
@@ -94,54 +94,11 @@
 
 
         </div>
-        <hr>
+        
     </div>
-
-
-    <div class="container datatable-container">
-        <div class="">
-            <h2>Department data</h2>
-        </div>
-        <div class="">
-            <table id="department_data" class="display table">
-                <thead>
-                    <tr>
-                        <th>#</th>
-                        <th>Department</th>
-                        <th>Total call time</th>
-                        <th>Answered</th>
-                        <th>No answer</th>
-                        <th>Busy</th>
-                        <th>Failed</th>
-                        <th>Total calls</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <?php
-                    $iterator = 0;
-                    foreach ($department_datatable as $key => $value) {
-                        $total = $value['ANSWERED'] + $value['NO ANSWER'] + $value['BUSY'] + $value['FAILED'];
-                        echo "<tr>";
-                        echo "<td><b>" . ++$iterator . "</b></td>";
-                        echo "<td>" . $key . "</td>"; // key represents department
-                        echo "<td>" . convertDate($value['call time']) . "</td>";
-                        echo "<td>" . $value['ANSWERED'] . "</td>";
-                        echo "<td>" . $value['NO ANSWER'] . "</td>";
-                        echo "<td>" . $value['BUSY'] . "</td>";
-                        echo "<td>" . $value['FAILED'] . "</td>";
-                        echo "<td>" . $total . "</td>";
-                        echo "</tr>";
-                    }
-
-                    ?>
-                </tbody>
-            </table>
-        </div>
-    </div>
-
 
     <div style="background-color:#F8F8F8">
-        <hr>
+        <hr id="generate_graphs_scroll_location">
         <div class="container">
             <div class="row" style="padding-bottom:5px">
                 <h3>Generate graphs</h3>
@@ -196,6 +153,49 @@
         </div>
         <hr>
     </div>
+
+    <div class="container datatable-container">
+        <div class="">
+            <h2>Department data</h2>
+        </div>
+        <div class="">
+            <table id="department_data" class="display table">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Department</th>
+                        <th>Total call time</th>
+                        <th>Answered</th>
+                        <th>No answer</th>
+                        <th>Busy</th>
+                        <th>Failed</th>
+                        <th>Total calls</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php
+                    $iterator = 0;
+                    foreach ($department_datatable as $key => $value) {
+                        $total = $value['ANSWERED'] + $value['NO ANSWER'] + $value['BUSY'] + $value['FAILED'];
+                        echo "<tr>";
+                        echo "<td><b>" . ++$iterator . "</b></td>";
+                        echo "<td>" . $key . "</td>"; // key represents department
+                        echo "<td>" . convertDate($value['call time']) . "</td>";
+                        echo "<td>" . $value['ANSWERED'] . "</td>";
+                        echo "<td>" . $value['NO ANSWER'] . "</td>";
+                        echo "<td>" . $value['BUSY'] . "</td>";
+                        echo "<td>" . $value['FAILED'] . "</td>";
+                        echo "<td>" . $total . "</td>";
+                        echo "</tr>";
+                    }
+
+                    ?>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+
 
 
 
@@ -404,11 +404,14 @@
     </script>
 
     <script>
+        let navbar = $("#top_navbar"); // for scrolling
+
         generate_graph_button.onclick = function() {
             let current_department = department_selector.value;
             let curr_employee = $('#department_employee_selector').selectpicker('val');
             let num = curr_employee.split(" ").pop();
             num = num.substring(1,num.length-1);
+            
 
             if (current_department === "") { // quit function if no department selected
                 alert("Please select a department to generate graph");
@@ -427,6 +430,12 @@
                 drawDepartmentDonut(php_department_employee_donut_data[current_department][num][1]['Outbound'], "outboundDepartmentDonut", "Outbound");
                 drawDepartmentDonut(php_department_employee_donut_data[current_department][num][1]['External'], "externalDepartmentDonut", "External");
             }
+
+            // scrolling
+            
+            $([document.documentElement, document.body]).animate({
+                scrollTop: $("#generate_graphs_scroll_location").offset().top - navbar.height()
+            }, 1000);
 
         }
     </script>
