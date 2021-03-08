@@ -75,7 +75,7 @@
                 <div class="navbar-nav">
                     <a class="nav-item nav-link" href="index.php">Home <span class="sr-only">(current)</span></a>
                     <a class="nav-item nav-link active" href="#">Department</a>
-                    <a class="nav-item nav-link" href="rawdata.php">Raw-data</a>
+                    <!-- <a class="nav-item nav-link" href="rawdata.php">Raw-data</a> -->
 
                 </div>
             </div>
